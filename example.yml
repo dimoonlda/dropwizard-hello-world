@@ -1,0 +1,32 @@
+template: Hello, %s!
+defaultName: Stranger
+
+database:
+  driverClass: org.postgresql.Driver
+  user: postgres
+  password: postgres
+  url: jdbc:postgresql://localhost:5432/northwind
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+  maxSize: 5
+  minSize: 1
+  initialSize: 3
+  properties:
+    charSet: UTF-8
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 9000
+      outputBufferSize: 32KiB
+      idleTimeout: 30 seconds
+      minBufferPoolSize: 64 bytes
+      bufferPoolIncrement: 1KiB
+      maxBufferPoolSize: 64KiB
+      acceptorThreads: 1
+      selectorThreads: 2
+      acceptQueueSize: 1024
+      reuseAddress: true
+      soLingerTime: 600s
+  adminConnectors:
+    - type: http
+      port: 9180
